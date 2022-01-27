@@ -39,7 +39,7 @@
 									<img src="{{url('/images/'.auth()->user()->image)}}" alt="">
 								</figure>
 								<div class="newpst-input">
-									<form action="{{ url('/post')}}" method="post" enctype="multipart/form-data" >
+									<form action="{{ url('/post')}}" method="post" enctype="multipart/form-data">
 										@csrf
 										<textarea rows="2" placeholder="write something" name="caption"></textarea>
 										<div class="attachments">
@@ -48,7 +48,7 @@
 												<li>
 													<i class="fa fa-image"></i>
 													<label class="fileContainer">
-													<input type="file" name="image"/>
+														<input type="file" name="image" />
 													</label>
 												</li>
 
@@ -64,7 +64,7 @@
 						</div><!-- add post new box -->
 						<div class="loadMore">
 							<div class="central-meta item">
-							@foreach ($posts as $key => $post)
+								@foreach ($posts as $key => $post)
 								<div class="user-post">
 									<div class="friend-info">
 										<figure>
@@ -72,7 +72,7 @@
 										</figure>
 										<div class="friend-name">
 											<ins><a href="time-line.html" title="">{{$post->name}}</a></ins>
-											
+
 										</div>
 										<div class="post-meta">
 											<img src="{{url('/images/'.$post->image)}}" alt="">
@@ -85,39 +85,36 @@
 											</div>
 										</div>
 									</div>
-								
-									<!-- <div class="coment-area">
-										<ul class="we-comet">
 
+									<div class="coment-area">
+										<ul class="we-comet">
+										@foreach ($comments as $key => $comment)
+										@if($comment->post_id == $post->id)
 											<li>
 												<div class="comet-avatar">
-													<img src="images/resources/comet-1.jpg" alt="">
+													<img src="{{url('/images/'.$comment->userimage)}}" alt="">
 												</div>
 												<div class="we-comment">
 													<div class="coment-head">
-														<h5><a href="time-line.html" title="">Donald
-																Trump</a></h5>
+														<h5><a href="time-line.html" title="">{{$comment->name}}</a></h5>
 														<span>1 week ago</span>
 														<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
 													</div>
-													<p>we are working for the dance and sing songs. this
-														video is very awesome for the youngster. please vote
-														this video and like our channel
+													<p>{{$comment->comment}}
 														<i class="em em-smiley"></i>
 													</p>
 												</div>
 											</li>
-											<li>
-												<a href="#" title="" class="showmore underline">more
-													comments</a>
-											</li>
+										@endif
+										@endforeach
 											<li class="post-comment">
 												<div class="comet-avatar">
-													<img src="images/resources/comet-1.jpg" alt="">
+													<img src="{{url('/images/'.auth()->user()->image)}}" alt="">
 												</div>
 												<div class="post-comt-box">
-													<form method="post">
-														<textarea placeholder="Post your comment"></textarea>
+													<form action="{{ url('/comment/'.$post->id)}}" method="post" enctype="multipart/form-data">
+														@csrf
+														<textarea placeholder="Post your comment " name="comment"></textarea>
 														<div class="add-smiles">
 															<span class="em em-expressionless" title="add icon"></span>
 														</div>
@@ -135,12 +132,12 @@
 															<i class="em em-rage"></i>
 															<i class="em em-stuck_out_tongue"></i>
 														</div>
-														<button type="submit"></button>
+														<button type="submit">comment</button>
 													</form>
 												</div>
 											</li>
 										</ul>
-									</div> -->
+									</div>
 								</div>
 								@endforeach
 							</div>

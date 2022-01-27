@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\comments;
 use App\Models\posts;
 use App\Models\Users;
 use App\Models\follows;
@@ -230,8 +230,10 @@ class userscontroller extends Controller
 
         $posts = posts::join('users','users.id','=','post.user_id')->select('post.*','users.image as userimage','users.name')->whereIn('users.id',$id )->get();
 
+        $comment=comments::join('users','users.id','=','comment.user_id')->select('comment.*','users.image as userimage','users.name')->get();
 
-        return view('index', ['accounts' => $accounts,'data' => $data,'posts'=>$posts]);
+
+        return view('index', ['accounts' => $accounts,'data' => $data,'posts'=>$posts,'comments'=>$comment]);
     }
     public function addfriend($id){
         

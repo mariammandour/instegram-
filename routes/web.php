@@ -26,6 +26,7 @@ Route::resource('User',userscontroller::class);
 Route::get('/editpassword/{id}',[userscontroller::class,'editpassword']);
 Route::post('/updatepassword/{id}',[userscontroller::class,'updatepassword']);
 Route::post('/dologin',[userscontroller::class,'dologin']);
+Route::post('/comment/{id}',[postscontroller::class,'comment']);
 Route::get('/logout',[userscontroller::class,'logout']);
 Route::get('/addfriend/{id}',[userscontroller::class,'addfriend']);
 Route::get('/index',[userscontroller::class,'notfollow']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\comments;
 use App\Models\posts;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,29 @@ class postscontroller extends Controller
         } else {
             $Message = "Error In Uploading Try Again ";
         }
+        session()->flash('Message', $Message);
+
+        return redirect(url('/index'));
+    }
+
+    public function comment(Request $request,$id)
+    {
+        $data =    $this->validate($request, [
+            "comment"     => "required",
+
+        ]);
+
+
+            $data['user_id'] = auth()->user()->id;
+            $data['post_id'] =$id;
+
+            $op =  comments::create($data);
+
+            if ($op) {
+                $Message = "comment";
+            } else {
+                $Message = "Error Try Again";
+            }
         session()->flash('Message', $Message);
 
         return redirect(url('/index'));
