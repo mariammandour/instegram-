@@ -215,13 +215,20 @@ class userscontroller extends Controller
         auth()->logout();
         return redirect(url('User/create'));
     }
-    
+    // ->select('id','name')
+    //       ->whereNotIn('id', DB::table('curses')->where('id_user', '=', $id)->pluck('user_id'))
+    //       ->get();  
     public function notfollow(){
-        $data = users::join('follow','follow.friend_id','=','users.id')->select('users.id','users.name','users.image')->where('follow.user_id','=',auth()->user()->id)->get();
         
-        $accounts = users::join('follow','users.id','!=','follow.friend_id')->select('users.id','users.name','users.image')->where('follow.user_id','=',auth()->user()->id)->where('users.id','!=',auth()->user()->id)->get();
+        $data = users::join('follow','follow.friend_id','=','users.id')->select('users.id as id','users.name','users.image')->where('follow.user_id','=',auth()->user()->id)->get();
+        
+        $id = users::join('follow','follow.friend_id','=','users.id')->select('users.id')
+        ->where('follow.user_id','=',auth()->user()->id)->get()->pluck('id')->toArray();
+        array_push($id,auth()->user()->id);
+        
+        $accounts = users::select('users.id','users.name','users.image')->whereNotIn('users.id',$id )->get();
 
-        $posts = posts::join('users','users.id','=','post.user_id')->select('post.*','users.image as userimage','users.name')->get();
+        $posts = posts::join('users','users.id','=','post.user_id')->select('post.*','users.image as userimage','users.name')->whereIn('users.id',$id )->get();
 
 
         return view('index', ['accounts' => $accounts,'data' => $data,'posts'=>$posts]);
