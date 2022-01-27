@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Usercontroller;
+use App\Http\Controllers\postscontroller;
+use App\Http\Controllers\userscontroller;
 
 
 /*
@@ -15,27 +16,29 @@ use App\Http\Controllers\Usercontroller;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/index', function () {
     return view('index');
 });
-Route::get('/profile', function () {
-    return view('profile');
-});
-Route::get('/editpassword', function () {
-    return view('editpassword');
-});
-Route::get('/editprofile', function () {
-    return view('editprofile');
-});
-Route::get('/friends', function () {
-    return view('friends');
-});
 
-Route::get('/login',[Usercontroller::class,'create']);
-Route::post('/Register',[userController::class,'store']);
-Route::post('/dologin',[userController::class,'dologin']);
-Route::post('/dologin',[userController::class,'dologin']);
-Route::get('/logout',[userController::class,'logout']);
+Route::resource('User',userscontroller::class);
+
+Route::get('/editpassword/{id}',[userscontroller::class,'editpassword']);
+Route::post('/updatepassword/{id}',[userscontroller::class,'updatepassword']);
+Route::post('/dologin',[userscontroller::class,'dologin']);
+Route::get('/logout',[userscontroller::class,'logout']);
+Route::get('/addfriend/{id}',[userscontroller::class,'addfriend']);
+Route::get('/index',[userscontroller::class,'notfollow']);
+Route::resource('post',postscontroller::class);
+
+
+
+
+
+// /Blog         (GET)            ==  Route::get('Blog',[blogController::class,'index']);
+// /Blog/create  (GET)            ==  Route::get('Blog/create',[blogController::class,'create']);
+// /Blog         (post)           ==  Route::post('Blog',[blogController::class,'store']);
+// /Blog/{id}    (GET)            ==  Route::get('Blog/{id}',[blogController::class,'show']);
+// /Blog/{id}/edit    (GET)       ==  Route::get('Blog/{id}/edit',[blogController::class,'edit']);
+// /Blog/{id}    (put)            ==  Route::put('Blog/{id}',[blogController::class,'update']);
+// /Blog/{id}    (delete)         ==  Route::delete('Blog/{id}',[blogController::class,'destory']);

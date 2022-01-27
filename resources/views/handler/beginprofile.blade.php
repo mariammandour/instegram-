@@ -1,6 +1,6 @@
 <section>
 		<div class="feature-photo">
-			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
+			<figure><img src="{{url('/images/resources/timeline-1.jpg')}}" alt=""></figure>
 			
 			
 			<div class="container-fluid">
@@ -8,14 +8,8 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
-								<form class="edit-phto">
-									<i class="fa fa-camera-retro"></i>
-									<label class="fileContainer">
-										Edit Display Photo
-										<input type="file"/>
-									</label>
-								</form>
+								<img src="{{url('/images/'.auth()->user()->image)}}" alt="">
+								
 							</figure>
 						</div>
 					</div>
@@ -23,11 +17,11 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-									<h5>Janice Griffith</h5>
+									<h5>{{auth()->user()->name}}</h5>
 									
 								</li>
 								<li>
-									<a class="active" href='{{url('/profile')}}' title="" data-ripple="">time line</a>
+									<a class="active" href='{{url('/post')}}' title="" data-ripple="">time line</a>
 									<!-- <a class="" href="{{url('/friends')}}" title="" data-ripple="">Friends</a> -->
 									
 								</li>

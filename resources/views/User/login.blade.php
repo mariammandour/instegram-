@@ -20,7 +20,7 @@
 							Winku is free to use for as long as you want with two active projects.
 						</p>
 						<div class="friend-logo">
-							<span><img src="images/wink.png" alt=""></span>
+							<span><img src="{{url('/images/wink.png')}}" alt=""></span>
 						</div>
 						<a href="#" title="" class="folow-me">Follow Us on</a>
 					</div>
@@ -48,8 +48,8 @@
 
 							<div class="submit-btns">
 								<!-- <button class="mtr-btn signin" type="button"><span>Login</span></button> -->
-								<input type="submit" value="login">
-								<button class="mtr-btn signup" type="submit"><span>Register</span></button>
+								<button type="submit" class="btn btn-info">login</button>
+								<button class="signup btn btn-info" type="submit"><span>Register</span></button>
 							</div>
 						</form>
 					</div>
@@ -59,7 +59,7 @@
 							Don’t use Winku Yet? <a href="#" title="">Take the tour</a> or <a href="#" title="">Join
 								now</a>
 						</p>
-						<form method="post" action="{{ url('/Register')}}">
+						<form method="post" action="{{ url('/User')}}" enctype="multipart/form-data">
 							@csrf
 							<div class="form-group">
 								<input type="text" name="name" value="{{ old('name') }}" />
@@ -103,7 +103,7 @@
 
 							<a href="#" title="" class="already-have">Already have an account</a>
 							<div class="submit-btns">
-								<input type="submit" value="submit">
+							<button type="submit" class="btn btn-info">Register</button>
 								<!-- <button class="mtr-btn signup" type="submit"><span>Register</span></button> -->
 							</div>
 						</form>
