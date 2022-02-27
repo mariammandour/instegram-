@@ -7,10 +7,6 @@ Localhost\
 phpMyadmin
 
 ## Tech Description:-
-### frontend:
-html,css,js,jquery,bootstrap,\
-AdminLTE
-### backend:
 php laravel\
 MY SQL\
 CRUD Functions
