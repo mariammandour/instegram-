@@ -13,6 +13,6 @@ AdminLTE
 ### backend:
 php laravel\
 MY SQL\
-CRUD Functions\
+CRUD Functions
 
 ## link for website:-
