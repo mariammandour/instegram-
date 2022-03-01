@@ -11,4 +11,3 @@ php laravel\
 MY SQL\
 CRUD Functions
 
-## link for website:-
